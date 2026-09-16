@@ -37,7 +37,7 @@ def set_winsize(fd: int, rows: int, cols: int) -> None:
 def child_shell() -> None:
     os.environ.setdefault("TERM", "xterm-256color")
     os.environ.setdefault("LANG", "C.UTF-8")
-    os.environ["PS1"] = "\[\e[1;32m\]root@hypervm\[\e[0m\]:\w# "
+    os.environ["PS1"] = "\\[\\e[1;32m\\]root@hypervm\\[\\e[0m\\]:\\w# "
     home_dir = Path("/root")
     if not home_dir.exists():
         home_dir = Path.home()
@@ -142,8 +142,7 @@ async def terminal(websocket: WebSocket) -> None:
 
         await websocket.send_text(json.dumps({
             "type": "ready",
-            "message": "Authenticated. Connected to Debian PTY.
-",
+            "message": "Authenticated. Connected to Debian PTY.\r\n",
         }))
 
         sender = asyncio.create_task(browser_to_pty())
