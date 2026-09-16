@@ -37,16 +37,14 @@ def set_winsize(fd: int, rows: int, cols: int) -> None:
 def child_shell() -> None:
     os.environ.setdefault("TERM", "xterm-256color")
     os.environ.setdefault("LANG", "C.UTF-8")
-    os.environ["PS1"] = "\\[\\e[1;32m\\]root@hypervm\\[\\e[0m\\]:\\w# "
-    home_dir = Path("/root")
-    if not home_dir.exists():
-        home_dir = Path.home()
+    os.environ["PS1"] = "\\[\\e[1;32m\\]render@hypervm\\[\\e[0m\\]:\\w# "
+    home_dir = Path.home()
     os.environ["HOME"] = str(home_dir)
     try:
         os.chdir(home_dir)
     except Exception:
         pass
-    os.execv("/bin/bash", ["/bin/bash", "--login"])
+    os.execv("/bin/bash", ["/bin/bash"])
 
 
 @app.get("/")
